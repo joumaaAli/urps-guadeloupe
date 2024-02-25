@@ -1,0 +1,11 @@
+$body-bg: #f8f9fa;
+$body-color: #021223;
+$primary: #565e12; // Example: Change primary color
+$success: #2ecc71;
+
+body {
+  background-color: $body-bg;
+  color: $body-color;
+}
+
+@import "~bootstrap/scss/bootstrap";
