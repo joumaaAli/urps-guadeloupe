@@ -26,9 +26,10 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
+    "**/*.js",
     "**/*.tsx",
-    ".next/types/**/*.ts",
-    "src/components/Navbar/Navbar.tsx"
+    "**/*.jsx",
+    ".next/types/**/*.ts"
   ],
   "exclude": ["node_modules"]
 }

@@ -2,7 +2,7 @@ import { HandleLogout } from "@/services/userServices";
 import React, { ReactNode } from "react";
 import { Button } from "react-bootstrap";
 
-const AdminLayout: React.FC<{ children: ReactNode }> = ({ children }) => {
+const AdminLayout = ({ children }) => {
   return (
     <div>
       <h1>Admin Layout</h1>

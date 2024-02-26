@@ -3,7 +3,7 @@ import style from "./Default.module.scss";
 import NavBar from "@/components/Navbar/Navbar";
 import CarouselComponent from "@/components/Carousel/Carousel";
 
-const DefaultLayout: React.FC<{ children: ReactNode }> = ({ children }) => {
+const DefaultLayout = ({ children }) => {
   return (
     <>
       <NavBar />
