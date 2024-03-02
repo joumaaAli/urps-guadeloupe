@@ -1,10 +1,15 @@
 .header-class {
   background-image: url(../../utils/img/header-img.jpg);
+  border-radius: 10px; /* Adjust the value to control the roundness */
+  background-size: cover; /* Ensures the background image covers the entire container */
 }
-
 .header-class {
   background-size: cover;
   background-position: center;
+}
+
+.rounded-image {
+  border-radius: 20px;
 }
 
 .header-class h1 {

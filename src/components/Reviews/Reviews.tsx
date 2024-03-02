@@ -16,9 +16,11 @@ import Image from "next/image";
 export function Reviews() {
   return (
     <div className="reviews-section container">
-      <h2 className="text-center mb-5 text-uppercase fw-bold fs-1">Reviews</h2>
+      <h2 className="text-center mb-5 text-uppercase fw-bold fs-1">
+        Les membres du bureau
+      </h2>
       <div className="row g-4">
-        <div className="col-lg-6">
+        <div className="col-lg-3">
           <Card className="h-100 shadow">
             <CardBody>
               <div className="p-4">
@@ -38,7 +40,7 @@ export function Reviews() {
             </CardFooter>
           </Card>
         </div>
-        <div className="col-lg-6">
+        <div className="col-lg-3">
           <Card className="h-100 shadow">
             <CardBody>
               <div className="p-4">
@@ -58,7 +60,7 @@ export function Reviews() {
             </CardFooter>
           </Card>
         </div>
-        <div className="col-lg-6">
+        <div className="col-lg-3">
           <Card className="h-100 shadow">
             <CardBody>
               <div className="p-4">
@@ -79,7 +81,7 @@ export function Reviews() {
             </CardFooter>
           </Card>
         </div>
-        <div className="col-lg-6">
+        <div className="col-lg-3">
           <Card className="h-100 shadow">
             <CardBody>
               <div className="p-4">
