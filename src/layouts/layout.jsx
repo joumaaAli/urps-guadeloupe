@@ -1,6 +1,6 @@
 import { GetServerSidePropsContext } from "next";
 import { getSession } from "next-auth/react";
-import AuthLayout from "./AuthLayout";
+import AuthLayout from "./Auth/AuthLayout";
 import AdminLayout from "./AdminLayout";
 import DefaultLayout from "./Default/DefaultLayout";
 import { path } from "@/utils/routes";

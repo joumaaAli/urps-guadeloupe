@@ -2,8 +2,7 @@ import RegisterForm from "@/components/Form/RegisterForm";
 
 const RegisterPage = () => {
   return (
-    <div>
-      <h1>Register</h1>
+    <div className="d-flex justify-content-center align-items-center flex-column gap-2">
       <RegisterForm />
     </div>
   );

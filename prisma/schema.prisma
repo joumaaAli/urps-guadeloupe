@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -18,6 +12,12 @@ enum Role {
   ADMIN
 }
 
+enum Status {
+  ACTIVE
+  INACTIVE
+  PENDING
+}
+
 model User {
   id            Int      @id @default(autoincrement())
   name          String?
@@ -30,4 +30,31 @@ model User {
   updatedAt     DateTime @default(now()) @updatedAt @map(name: "updated_at")
 
   @@map(name: "users")
+}
+
+model Praticien {
+  orderNumber   String   @id
+  firstName     String
+  lastName      String
+  RPPSNumber    String?
+  cabinetNumber String
+  mobileNumber  String
+  email         String   @unique
+  city          City     @relation(fields: [cityId], references: [id])
+  cityId        Int
+  specialties   Specialty[]
+  materiels     String[]
+  status      Status   @default(PENDING)
+}
+
+model City {
+  id          Int          @id @default(autoincrement())
+  name        String
+  praticiens  Praticien[]
+}
+
+model Specialty {
+  id          Int          @id @default(autoincrement())
+  name        String
+  praticiens  Praticien[]
 }

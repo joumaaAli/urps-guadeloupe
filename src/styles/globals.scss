@@ -1,7 +1,11 @@
-$body-bg: #f8f9fa;
-$body-color: #021223;
-$primary: #565e12; // Example: Change primary color
-$success: #2ecc71;
+$body-bg: #e1afd1;
+$body-color: #ffff; // color of the text
+$primary: #7469b6; // Example: Change primary color
+$success: #ffe6e6;
+$danger: #ff6666;
+$border-radius: 0.25rem;
+$border-color: #ffe6e6;
+$border-width: 0.1rem;
 
 body {
   background-color: $body-bg;
