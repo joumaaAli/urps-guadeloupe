@@ -17,6 +17,19 @@ declare module "next-auth" {
       role: "USER" | "ADMIN";
     } & DefaultSession["user"];
   }
+
+  interface Praticien {
+    orderNumber: string;
+    firstName: string;
+    lastName: string;
+    RPPSNumber?: string;
+    cabinetNumber: string;
+    mobileNumber: string;
+    email: string;
+    cityId: number;
+    specialtiesIds: number[];
+    materiels: string[];
+  }
 }
 
 declare module "next-auth/jwt" {
