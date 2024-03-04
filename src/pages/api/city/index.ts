@@ -8,19 +8,14 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    if (req.method === "GET") {
-      const search = (req.query.search as string) || "";
-      const materiels = await prisma.materiel.findMany({
-        where: {
-          name: {
-            contains: search,
-            mode: "insensitive",
-          },
-        },
+    if (req.method === "POST") {
+      const { name } = req.body;
+      const newCity = await prisma.city.create({
+        data: { name },
       });
-      res.status(200).json(materiels);
+      res.status(201).json(newCity);
     } else {
-      res.setHeader("Allow", ["GET"]);
+      res.setHeader("Allow", ["POST"]);
       res.status(405).end(`Method ${req.method} Not Allowed`);
     }
   } catch (error: any) {

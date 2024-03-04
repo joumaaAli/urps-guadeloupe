@@ -14,6 +14,7 @@ export default async function handler(
         where: {
           name: {
             contains: search,
+            mode: "insensitive",
           },
         },
       });

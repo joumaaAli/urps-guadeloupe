@@ -5,14 +5,14 @@ const CustomAsyncSelect = ({
   defaultOptions,
   loadOptions,
   onChange,
-  defaultValue,
-  isMulti,
+  defaultValue = null,
+  isMulti = false,
 }) => {
   const colourStyles = {
     control: (styles) => ({
       ...styles,
-      backgroundColor: "#283046",
-      borderColor: "#404656",
+      backgroundColor: "transparent",
+      borderColor: "white",
       color: "white",
     }),
     option: (styles) => ({ ...styles, color: "#283046" }),
@@ -29,7 +29,7 @@ const CustomAsyncSelect = ({
       loadOptions={loadOptions}
       onChange={onChange}
       defaultValue={defaultValue}
-      styles={true ? colourStyles : ""}
+      styles={colourStyles}
       isMulti={isMulti}
       isClearable={true}
     />

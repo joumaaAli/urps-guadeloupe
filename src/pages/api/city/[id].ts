@@ -7,10 +7,10 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  // Parse the specialty safely
-  const specialty = parseInt(req.query.id as string, 10);
+  // Parse the city safely
+  const city = parseInt(req.query.id as string, 10);
 
-  if (Number.isNaN(specialty)) {
+  if (Number.isNaN(city)) {
     res.status(400).json({ error: "Invalid ID" });
     return;
   }
@@ -24,18 +24,24 @@ export default async function handler(
         return;
       }
 
-      const updatedMateriel = await prisma.specialty.update({
-        where: { id: specialty },
+      const updatedMateriel = await prisma.city.update({
+        where: { id: city },
         data: { name },
       });
       res.status(200).json(updatedMateriel);
+    } else if (req.method === "DELETE") {
+      const deletedMateriel = await prisma.city.delete({
+        where: { id: city },
+      });
+      res.status(200).json(deletedMateriel);
     } else {
-      res.setHeader("Allow", ["PUT"]);
+      res.setHeader("Allow", ["PUT", "DELETE"]);
       res.status(405).end(`Method ${req.method} Not Allowed`);
     }
   } catch (error) {
-    // Handle any errors that occur during the update
-    res.status(500).json({ error: "An error occurred during the update" });
+    res
+      .status(500)
+      .json({ error: `An error occurred during the ${req.method}` });
   } finally {
     // Disconnect Prisma Client
     await prisma.$disconnect();

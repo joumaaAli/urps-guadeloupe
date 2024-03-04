@@ -10,7 +10,7 @@ export default async function handler(
   try {
     if (req.method === "GET") {
       const search = (req.query.search as string) || "";
-      const materiels = await prisma.materiel.findMany({
+      const cities = await prisma.city.findMany({
         where: {
           name: {
             contains: search,
@@ -18,7 +18,7 @@ export default async function handler(
           },
         },
       });
-      res.status(200).json(materiels);
+      res.status(200).json(cities);
     } else {
       res.setHeader("Allow", ["GET"]);
       res.status(405).end(`Method ${req.method} Not Allowed`);

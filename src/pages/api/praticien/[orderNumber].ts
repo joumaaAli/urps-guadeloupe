@@ -32,12 +32,19 @@ export default async function handler(
         data: data,
       });
       res.status(200).json(updatedPraticien);
+    } else if (req.method === "DELETE") {
+      const deletedPraticien = await prisma.praticien.delete({
+        where: { orderNumber },
+      });
+      res.status(200).json(deletedPraticien);
     } else {
-      res.setHeader("Allow", ["GET", "UPDATE"]);
+      res.setHeader("Allow", ["GET", "UPDATE", "DELETE"]);
       res.status(405).end(`Method ${req.method} Not Allowed`);
     }
   } catch (error) {
-    res.status(500).json({ error: "Failed to retrieve praticien" });
+    res
+      .status(500)
+      .json({ error: `An error occurred during the ${req.method}` });
   } finally {
     await prisma.$disconnect();
   }

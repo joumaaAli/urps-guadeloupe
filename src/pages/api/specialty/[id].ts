@@ -7,10 +7,10 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  // Parse the materielId safely
-  const materielId = parseInt(req.query.id as string, 10);
+  // Parse the specialty safely
+  const specialty = parseInt(req.query.id as string, 10);
 
-  if (Number.isNaN(materielId)) {
+  if (Number.isNaN(specialty)) {
     res.status(400).json({ error: "Invalid ID" });
     return;
   }
@@ -24,14 +24,14 @@ export default async function handler(
         return;
       }
 
-      const updatedMateriel = await prisma.materiel.update({
-        where: { id: materielId },
+      const updatedMateriel = await prisma.specialty.update({
+        where: { id: specialty },
         data: { name },
       });
       res.status(200).json(updatedMateriel);
     } else if (req.method === "DELETE") {
-      const deletedMateriel = await prisma.materiel.delete({
-        where: { id: materielId },
+      const deletedMateriel = await prisma.specialty.delete({
+        where: { id: specialty },
       });
       res.status(200).json(deletedMateriel);
     } else {
@@ -39,7 +39,6 @@ export default async function handler(
       res.status(405).end(`Method ${req.method} Not Allowed`);
     }
   } catch (error) {
-    // Handle any errors that occur during the update
     res
       .status(500)
       .json({ error: `An error occurred during the ${req.method}` });
