@@ -1,24 +1,17 @@
 // components/RegisterForm.tsx
 import { useFormik } from "formik";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Card, Row } from "react-bootstrap";
 import { Col, FormFeedback, Input, Label } from "reactstrap";
 import * as yup from "yup";
 import styles from "./Form.module.scss";
 import { addPraticien } from "@/services/praticien";
+import CustomAsyncSelect from "../AsyncSelect/AsyncSelect";
 
 const RegisterForm = () => {
-  const [specialities, setSpecialities] = useState([
-    "Cardiology",
-    "Neurology",
-    "Pediatrics",
-  ]);
-  const [cities, setCities] = useState(["Chicago", "Houston"]);
-  const [materiels, setMateriels] = useState([
-    "Materiel 1",
-    "Materiel 2",
-    "Materiel 3",
-  ]);
+  const [specialities, setSpecialities] = useState([]);
+  const [cities, setCities] = useState([]);
+  const [materiels, setMateriels] = useState([]);
   const fields = [
     {
       name: "firstName",
@@ -80,12 +73,12 @@ const RegisterForm = () => {
       },
     },
     {
-      name: "specialties",
+      name: "specialities",
       label: "Speciality",
       options: {
         type: "select",
         required: true,
-        options: specialities,
+        options: specialities.map((speciality) => speciality.name),
       },
     },
     {
@@ -94,7 +87,8 @@ const RegisterForm = () => {
       options: {
         type: "select",
         required: true,
-        options: materiels,
+        options: materiels.map((materiel) => materiel.name),
+        array: true,
       },
     },
     {
@@ -103,10 +97,19 @@ const RegisterForm = () => {
       options: {
         type: "select",
         required: true,
-        options: cities,
+        options: cities.map((city) => city.name),
       },
     },
   ];
+
+  useEffect(() => {
+    const fetchSpecialities = async () => {
+      const response = await fetch("http://localhost:3000/api/specialties");
+      const data = await response.json();
+      setSpecialities(data);
+    };
+    fetchSpecialities();
+  }, []);
 
   const validationSchema = yup.object({
     firstName: yup.string().required("First Name is required"),
@@ -136,10 +139,24 @@ const RegisterForm = () => {
     },
     validationSchema,
     onSubmit: (values, actions) => {
-      addPraticien(values);
+      addPraticien({
+        ...values,
+        city: {
+          connect: {
+            id: values.city,
+          },
+        },
+        specialties: {
+          connect: {
+            name: values.specialities,
+          },
+        },
+      });
       actions.setSubmitting(false);
     },
   });
+
+  console.log(formik.values);
 
   return (
     <Card className={`${styles["card"]}`}>
@@ -150,25 +167,34 @@ const RegisterForm = () => {
         {fields.map((field, index) => (
           <Col md="6" className="my-2" key={index}>
             <Label htmlFor={field.name}>{field.label}</Label>
-            <Input
-              type={field.options.type}
-              id={field.name}
-              name={field.name}
-              placeholder={field.label}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values[field.name]}
-              invalid={formik.touched[field.name] && formik.errors[field.name]}
-              required={field.options.required}
-              {...(field.options.type === "select" && {
-                children: field.options.options.map((option, index) => (
-                  <option key={index} value={option}>
-                    {option}
-                  </option>
-                )),
-              })}
-            />
-            <FormFeedback>{formik.errors[field.name]}</FormFeedback>
+            {field.options.type == "select" ? (
+              <>
+                <CustomAsyncSelect />
+              </>
+            ) : (
+              <>
+                <Input
+                  id={field.name}
+                  name={field.name}
+                  placeholder={field.label}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values[field.name]}
+                  invalid={
+                    formik.touched[field.name] && formik.errors[field.name]
+                  }
+                  required={field.options.required}
+                  {...(field.options.type === "select" && {
+                    children: field.options.options.map((option, index) => (
+                      <option key={index} value={option}>
+                        {option}
+                      </option>
+                    )),
+                  })}
+                />
+                <FormFeedback>{formik.errors[field.name]}</FormFeedback>
+              </>
+            )}
           </Col>
         ))}
       </Row>

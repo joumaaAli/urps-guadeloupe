@@ -43,8 +43,10 @@ model Praticien {
   city          City     @relation(fields: [cityId], references: [id])
   cityId        Int
   specialties   Specialty[]
-  materiels     String[]
+  materiels     Materiel[]
   status      Status   @default(PENDING)
+  createdAt     DateTime @default(now()) @map(name: "created_at")
+  updatedAt     DateTime @default(now()) @updatedAt @map(name: "updated_at")
 }
 
 model City {
@@ -57,4 +59,10 @@ model Specialty {
   id          Int          @id @default(autoincrement())
   name        String
   praticiens  Praticien[]
+}
+
+model Materiel {
+  id          Int          @id @default(autoincrement())
+  name        String
+  praticiens  Praticien[] 
 }
