@@ -115,7 +115,6 @@ const RegisterForm = () => {
     },
   ];
 
-  console.log(formik.values);
   return (
     <Card className={styles.card}>
       <Row>

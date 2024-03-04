@@ -31,9 +31,6 @@ export const handleLogin = async (email: string, password: string) => {
 export const handleRegister = async (data: RegisterData) => {
   try {
     const response = await axiosInstance.post("/auth/register", data);
-    // Handle success
-    console.log("Registration successful", response.data);
-    // Redirect the user or update the UI as needed
     const signInResult = await signIn("credentials", {
       redirect: false, // Prevent automatic redirection
       email: data.email,
