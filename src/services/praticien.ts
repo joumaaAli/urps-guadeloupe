@@ -25,13 +25,10 @@ export const getPraticien = (orderNumber: string) =>
 
 export const listPraticiens = () => axiosInstance.get(basePath);
 
-export const fetchPraticiens = async (inputValue: string) => {
-  const response = await axiosInstance.get(
-    `${basePath}/patriciens?search=${inputValue}`
-  );
-  const data = response.data;
-  return data.map((praticien: Praticien) => ({
-    value: praticien.orderNumber,
-    label: `${praticien.firstName} ${praticien.lastName}`,
-  }));
+export const fetchPendingParticiens = () =>
+  axiosInstance.get(basePath + "/pending");
+
+export const fetchPraticiens = (searchTerm: string) => {
+  const url = `${basePath + "/name" + "?name=" + searchTerm}`;
+  return axiosInstance.get(url);
 };

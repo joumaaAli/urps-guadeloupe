@@ -1,11 +1,15 @@
-$body-bg: #e1afd1;
-$body-color: #ffff; // color of the text
+$body-bg: #ffff;
+$body-color: black; // color of the text
 $primary: #7469b6; // Example: Change primary color
 $success: #ffe6e6;
 $danger: #ff6666;
 $border-radius: 0.25rem;
 $border-color: #ffe6e6;
 $border-width: 0.1rem;
+
+.btn-danger {
+  color: white !important;
+}
 
 body {
   background-color: $body-bg;

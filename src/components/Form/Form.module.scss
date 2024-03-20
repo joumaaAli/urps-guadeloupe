@@ -8,4 +8,34 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: #e1afd1;
+  h1 {
+    color: white;
+  }
+  label {
+    color: white;
+  }
+}
+
+.login-card {
+  padding: 20px;
+  margin: 20px;
+  border-radius: 10px;
+  width: 400px;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #e1afd1;
+  h1 {
+    color: white;
+  }
+  label {
+    color: white;
+  }
+  p {
+    color: red;
+    text-align: center;
+  }
 }

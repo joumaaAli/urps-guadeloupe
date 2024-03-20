@@ -46,6 +46,7 @@ const RegisterForm = () => {
       mobileNumber: "",
       RPPSNumber: "",
       status: "PENDING",
+      city: null,
     },
     validationSchema,
     onSubmit: (values) => {

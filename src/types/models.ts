@@ -8,8 +8,9 @@ interface Praticien {
   email: string;
   cityId: number;
   status: "ACTIVE" | "INACTIVE" | "PENDING";
-  specialties: Specialty[]; // Assuming Specialty is another interface
-  materiels: Materiel[]; // Assuming Materiel is another interface
+  specialties: Specialty[];
+  materiels: Materiel[];
+  city: City | null;
 }
 
 interface City {
